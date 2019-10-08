@@ -1,11 +1,10 @@
 import React from 'react'
-import { useMyHook } from 'react-avatar-firebase'
+import ReactAvatarFirebase from 'react-avatar-firebase'
 
 const App = () => {
-  const example = useMyHook()
   return (
     <div>
-      {example}
+      <ReactAvatarFirebase />
     </div>
   )
 }
