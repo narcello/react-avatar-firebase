@@ -1,0 +1,8 @@
+{
+  "short_name": "react-avatar-firebase",
+  "name": "react-avatar-firebase",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
