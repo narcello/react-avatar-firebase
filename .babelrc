@@ -5,5 +5,5 @@
     }],
     "@babel/preset-react"
   ],
-  "plugins": ["@babel/plugin-proposal-class-properties", "inline-svg"]
+  "plugins": ["@babel/plugin-proposal-class-properties"]
 }

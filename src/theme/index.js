@@ -13,6 +13,9 @@ const AvatarWrapper = styled.div`
   &:hover {
     border: 1.2px solid #000;
   }
+  &:focus {
+    outline: unset;
+  
 `
 const ImageWrapper = styled.div`
   width: 100%;

@@ -1,10 +1,10 @@
 import React, {useCallback, useState, useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
-import addPhoto from './icons/add_photo.svg'
-import loadingSvg from './icons/loading.svg'
 import {putFileInStorage} from './putFileInStorage'
 import PropTypes from 'prop-types'
 import { AvatarWrapper, ImageWrapper } from './theme'
+import AddPhoto from './icons/AddPhoto'
+import Loading from './icons/Loading'
 
 ReactAvatarFirebase.propTypes = {
   pathToStorage: PropTypes.string,
@@ -22,16 +22,10 @@ function ReactAvatarFirebase(props) {
   const {pathToStorage, imageSrc, handleGetImage} = props
   const [loading, setLoading] = useState(false)
   const [image, setImage] = useState(false)
-  const [svg, setSvg] = useState({})
 
   useEffect(() => {
     if (imageSrc) return setImage(imageSrc)
   }, [loading, imageSrc])
-
-  useEffect(() => {
-    let svgActive = loading ? loadingSvg : addPhoto
-    setSvg(svgActive)
-  }, [loading])
 
   const handleDropFiles = acceptedFiles => {
     acceptedFiles.forEach(file => {
@@ -62,8 +56,8 @@ function ReactAvatarFirebase(props) {
       <input {...getInputProps()} />
       {isDragActive ? (
         <div>Solte aqui...</div>
-      ) : loading || !image ? (
-        <img src={svg} />
+      ) : !image ? (
+        loading ? <Loading /> : <AddPhoto />
       ) : (
         <ImageWrapper style={{backgroundImage: `url(${image})`}} />
       )}
