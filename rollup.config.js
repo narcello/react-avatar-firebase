@@ -8,6 +8,7 @@ import pkg from './package.json'
 
 export default {
   input: 'src/index.js',
+  external: ['styled-components'],
   output: [
     {
       file: pkg.main,
@@ -20,6 +21,7 @@ export default {
       sourcemap: true
     }
   ],
+  globals: { 'styled-components': 'styled' },
   plugins: [
     external(),
     url({ exclude: ['**/*.svg'] }),

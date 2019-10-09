@@ -1,11 +1,10 @@
 import React, {useCallback, useState, useEffect} from 'react'
-// import {AvatarWrapper, ImgWrapper} from './theme'
 import {useDropzone} from 'react-dropzone'
 import addPhoto from './icons/add_photo.svg'
 import loadingSvg from './icons/loading.svg'
 import {putFileInStorage} from './putFileInStorage'
 import PropTypes from 'prop-types'
-import { style } from './theme'
+import { AvatarWrapper, ImageWrapper } from './theme'
 
 ReactAvatarFirebase.propTypes = {
   pathToStorage: PropTypes.string,
@@ -23,20 +22,15 @@ function ReactAvatarFirebase(props) {
   const {pathToStorage, imageSrc, handleGetImage} = props
   const [loading, setLoading] = useState(false)
   const [image, setImage] = useState(false)
-  // const [svg, setSvg] = useState({})
+  const [svg, setSvg] = useState({})
 
   useEffect(() => {
     if (imageSrc) return setImage(imageSrc)
   }, [loading, imageSrc])
 
-  // useEffect(() => {
-  //   let svgActive = loading ? loadingSvg : addPhoto
-  //   setSvg(svgActive)
-  // }, [loading])
-
-  const Svg = useCallback(() => {
+  useEffect(() => {
     let svgActive = loading ? loadingSvg : addPhoto
-    return svgActive
+    setSvg(svgActive)
   }, [loading])
 
   const handleDropFiles = acceptedFiles => {
@@ -64,16 +58,16 @@ function ReactAvatarFirebase(props) {
   }
 
   return (
-    <div style={style.avatar} {...getRootProps()}>
+    <AvatarWrapper {...getRootProps()}>
       <input {...getInputProps()} />
       {isDragActive ? (
         <div>Solte aqui...</div>
       ) : loading || !image ? (
-        <img src={<Svg />} />
+        <img src={svg} />
       ) : (
-        <div style={{backgroundImage: `url(${image})`, ...style.image}} />
+        <ImageWrapper style={{backgroundImage: `url(${image})`}} />
       )}
-    </div>
+    </AvatarWrapper>
   )
 }
 
