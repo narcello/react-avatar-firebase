@@ -21,7 +21,6 @@ export default {
       sourcemap: true
     }
   ],
-  globals: { 'styled-components': 'styled' },
   plugins: [
     external(),
     url({ exclude: ['**/*.svg'] }),
