@@ -2,7 +2,11 @@
   "name": "react-avatar-firebase",
   "version": "0.0.1",
   "description": "Easily Avatar on Firebase Storage",
-  "author": "MarcelloVSilva",
+  "author": {
+    "name": "Marcello Silva",
+    "email": "marcellovcs@gmail.com",
+    "url": "https://github.com/MarcelloVSilva"
+  },
   "license": "MIT",
   "repository": "MarcelloVSilva/react-avatar-firebase",
   "main": "dist/index.js",
@@ -31,7 +35,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
-    "eslint": "5.16.0",
+    "eslint": "^6.5.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
     "eslint-plugin-import": "^2.13.0",
