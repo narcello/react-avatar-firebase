@@ -5,11 +5,11 @@ const AvatarWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 128px;
-  height: 128px;
-  border: 1px solid #e2e2e2;
+  width: ${props => props.size};
+  height: ${props => props.size};
+  border: 1px solid ${props => props.borderColor};
   cursor: pointer;
-  transition: border 0.3s;
+  transition: border ${props => props.animationTime};
   &:hover {
     border: 1.2px solid #000;
   }
