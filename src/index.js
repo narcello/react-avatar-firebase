@@ -16,10 +16,10 @@ ReactAvatarFirebase.propTypes = {
 
 }
 
-ReactAvatarFirebase.defaultValues = {
+ReactAvatarFirebase.defaultProps = {
   pathToStorage: '',
   imageSrc: null,
-  handleGetImage: '',
+  handleGetImage: () => {},
   animationTime: '0.3s',
   size: '128px',
   borderColor: '#e2e2e2'
