@@ -12,7 +12,8 @@ ReactAvatarFirebase.propTypes = {
   handleGetImage: PropTypes.func,
   animationTime: PropTypes.string,
   size: PropTypes.string,
-  borderColor: PropTypes.string
+  borderColor: PropTypes.string,
+  borderOpacity: PropTypes.number
 
 }
 
@@ -22,11 +23,12 @@ ReactAvatarFirebase.defaultProps = {
   handleGetImage: () => {},
   animationTime: '0.3s',
   size: '128px',
-  borderColor: '#e2e2e2'
+  borderColor: '#e2e2e2',
+  borderOpacity: 1
 }
 
 function ReactAvatarFirebase(props) {
-  const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor} = props
+  const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity} = props
   const [loading, setLoading] = useState(false)
   const [image, setImage] = useState(false)
 
@@ -63,6 +65,7 @@ function ReactAvatarFirebase(props) {
       animationTime={animationTime}
       size={size}
       borderColor={borderColor}
+      borderOpacity={borderOpacity}
       {...getRootProps()}
     >
       <input {...getInputProps()} />

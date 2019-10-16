@@ -24,6 +24,7 @@ Use react-avatar-firebase for upload avatar on Firebase Storage.
 | animationTime | defines hover avatar wrapper animation time |
 | size | defines avatar wrapper size |
 | borderColor | defines border color |
+| borderOpacity | defines border opacity |
 
 ## Usage
 
@@ -41,6 +42,7 @@ const App = () => {
         animationTime='0.3s'
         size='128px'
         borderColor='#e2e2e2'
+        borderOpacity={0.9}
        />
     </div>
   )
