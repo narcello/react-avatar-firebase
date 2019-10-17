@@ -21,6 +21,10 @@ Use react-avatar-firebase for upload avatar on Firebase Storage.
 | pathToStorage  |  Name of folder/path where you will save your avatar on storage |
 |  imageSrc |  Pass a image url to render |
 | handleGetImage | Callback that gives you a return of upload of image on storage |
+| animationTime | defines hover avatar wrapper animation time |
+| size | defines avatar wrapper size |
+| borderColor | defines border color |
+| borderOpacity | defines border opacity |
 
 ## Usage
 
@@ -31,7 +35,15 @@ import RAF from 'react-avatar-firebase'
 const App = () => {
   return (
     <div>
-      <RAF pathToStorage="avatars" imageSrc={imageSrc} handleGetImage={handleGetImage}/>
+      <RAF
+        pathToStorage="avatars"
+        imageSrc={imageSrc}
+        handleGetImage={handleGetImage}
+        animationTime='0.3s'
+        size='128px'
+        borderColor='#e2e2e2'
+        borderOpacity={0.9}
+       />
     </div>
   )
 }

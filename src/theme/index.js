@@ -1,17 +1,18 @@
 import styled from 'styled-components'
+import hexToRgba from 'hex-to-rgba'
 
 const AvatarWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 128px;
-  height: 128px;
-  border: 1px solid #e2e2e2;
+  width: ${props => props.size};
+  height: ${props => props.size};
+  border: 1px solid ${props => hexToRgba(props.borderColor, props.borderOpacity)};
   cursor: pointer;
-  transition: border 0.3s;
+  transition: border ${props => props.animationTime};
   &:hover {
-    border: 1.2px solid #000;
+    border: 1.2px solid ${props => hexToRgba(props.borderColor, 0.4)};
   }
   &:focus {
     outline: unset;

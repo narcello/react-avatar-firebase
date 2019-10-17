@@ -9,17 +9,26 @@ import Loading from './icons/Loading'
 ReactAvatarFirebase.propTypes = {
   pathToStorage: PropTypes.string,
   imageSrc: PropTypes.string,
-  handleGetImage: PropTypes.func
+  handleGetImage: PropTypes.func,
+  animationTime: PropTypes.string,
+  size: PropTypes.string,
+  borderColor: PropTypes.string,
+  borderOpacity: PropTypes.number
+
 }
 
-ReactAvatarFirebase.defaultValues = {
+ReactAvatarFirebase.defaultProps = {
   pathToStorage: '',
   imageSrc: null,
-  handleGetImage: ''
+  handleGetImage: () => {},
+  animationTime: '0.3s',
+  size: '128px',
+  borderColor: '#e2e2e2',
+  borderOpacity: 1
 }
 
 function ReactAvatarFirebase(props) {
-  const {pathToStorage, imageSrc, handleGetImage} = props
+  const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity} = props
   const [loading, setLoading] = useState(false)
   const [image, setImage] = useState(false)
 
@@ -52,7 +61,13 @@ function ReactAvatarFirebase(props) {
   }
 
   return (
-    <AvatarWrapper {...getRootProps()}>
+    <AvatarWrapper
+      animationTime={animationTime}
+      size={size}
+      borderColor={borderColor}
+      borderOpacity={borderOpacity}
+      {...getRootProps()}
+    >
       <input {...getInputProps()} />
       {isDragActive ? (
         <div>Solte aqui...</div>
