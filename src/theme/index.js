@@ -12,7 +12,7 @@ const AvatarWrapper = styled.div`
   cursor: pointer;
   transition: border ${props => props.animationTime};
   &:hover {
-    border: 1.2px solid ${props => hexToRgba(props.borderColor, 0.1)};
+    border: 1.2px solid ${props => hexToRgba(props.borderColor, 0.4)};
   }
   &:focus {
     outline: unset;
