@@ -13,8 +13,8 @@ ReactAvatarFirebase.propTypes = {
   animationTime: PropTypes.string,
   size: PropTypes.string,
   borderColor: PropTypes.string,
-  borderOpacity: PropTypes.number
-
+  borderOpacity: PropTypes.number,
+  readOnly: PropTypes.bool
 }
 
 ReactAvatarFirebase.defaultProps = {
@@ -24,11 +24,12 @@ ReactAvatarFirebase.defaultProps = {
   animationTime: '0.3s',
   size: '128px',
   borderColor: '#e2e2e2',
-  borderOpacity: 1
+  borderOpacity: 1,
+  readOnly: false
 }
 
 function ReactAvatarFirebase(props) {
-  const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity} = props
+  const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity, readOnly} = props
   const [loading, setLoading] = useState(false)
   const [image, setImage] = useState(false)
 
@@ -60,22 +61,28 @@ function ReactAvatarFirebase(props) {
     setLoading(false)
   }
 
-  return (
-    <AvatarWrapper
-      animationTime={animationTime}
-      size={size}
-      borderColor={borderColor}
-      borderOpacity={borderOpacity}
-      {...getRootProps()}
-    >
-      <input {...getInputProps()} />
-      {isDragActive ? (
+  const Child = () => {
+    return <>
+      {!readOnly && <input {...getInputProps()} />}
+      {isDragActive && !readOnly ? (
         <div>Solte aqui...</div>
       ) : !image ? (
         loading ? <Loading /> : <AddPhoto />
       ) : (
         <ImageWrapper style={{backgroundImage: `url(${image})`}} />
       )}
+    </>
+  }
+
+  return (
+    <AvatarWrapper
+      animationTime={animationTime}
+      size={size}
+      borderColor={borderColor}
+      borderOpacity={borderOpacity}
+      readOnly={readOnly}
+      {...getRootProps()}>
+      <Child />
     </AvatarWrapper>
   )
 }

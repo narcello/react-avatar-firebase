@@ -6,17 +6,18 @@ const AvatarWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: ${props => props.size};
-  height: ${props => props.size};
-  border: 1px solid ${props => hexToRgba(props.borderColor, props.borderOpacity)};
-  cursor: pointer;
-  transition: border ${props => props.animationTime};
-  &:hover {
-    border: 1.2px solid ${props => hexToRgba(props.borderColor, 0.4)};
-  }
+  width: ${({size}) => size};
+  height: ${({size}) => size};
+  border: 1px solid ${({borderColor, borderOpacity}) => hexToRgba(borderColor, borderOpacity)};
+  transition: border ${({animationTime}) => animationTime};
+  ${({readOnly, borderColor}) => !readOnly && `
+    &:hover {
+      cursor: pointer;
+      border: 1.2px solid ${hexToRgba(borderColor, 0.4)};
+    }
+  `}
   &:focus {
     outline: unset;
-  
 `
 const ImageWrapper = styled.div`
   width: 100%;

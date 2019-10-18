@@ -19,12 +19,13 @@ Use react-avatar-firebase for upload avatar on Firebase Storage.
 | Props  |  Definition |
 | ------------ | ------------ |
 | pathToStorage  |  Name of folder/path where you will save your avatar on storage |
-|  imageSrc |  Pass a image url to render |
+| imageSrc |  Pass a image url to render |
 | handleGetImage | Callback that gives you a return of upload of image on storage |
 | animationTime | defines hover avatar wrapper animation time |
 | size | defines avatar wrapper size |
 | borderColor | defines border color |
 | borderOpacity | defines border opacity |
+| readOnly | True for disable image selection  |
 
 ## Usage
 
