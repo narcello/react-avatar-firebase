@@ -37,13 +37,21 @@ function ReactAvatarFirebase(props) {
     if (imageSrc) return setImage(imageSrc)
   }, [loading, imageSrc])
 
-  const handleDropFiles = acceptedFiles => {
-    acceptedFiles.forEach(file => {
-      addFileToStorageAndGetTask(file)
-    })
+  const handleDropFile = async acceptedFile => {
+    let file = acceptedFile[0]
+    createThumb(file)
+    addFileToStorageAndGetTask(file)
   }
 
-  const onDrop = useCallback(handleDropFiles)
+  const createThumb = file => {
+    const reader = new window.FileReader()
+    reader.readAsDataURL(file)
+    reader.onloadend = () => {
+      setImage(reader.result)
+    }
+  }
+
+  const onDrop = useCallback(handleDropFile)
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
     onDrop,
