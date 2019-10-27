@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders with default props 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 128px;
+  height: 128px;
+  border: 1px solid rgba(226,226,226,1);
+  -webkit-transition: border 0.3s;
+  transition: border 0.3s;
+}
+
+.c0:hover {
+  cursor: pointer;
+  border: 1.2px solid rgba(226,226,226,0.4);
+}
+
+.c0:focus {
+  outline: unset;
+}
+
+<div
+  class="c0"
+  tabindex="0"
+>
+  <input
+    accept=".png,.jpg,.jpeg,.svg"
+    autocomplete="off"
+    multiple=""
+    style="display: none;"
+    tabindex="-1"
+    type="file"
+  />
+  <svg
+    height="24"
+    viewBox="0 0 24 24"
+    width="24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"
+    />
+    <path
+      d="M0 0h24v24H0z"
+      fill="none"
+    />
+  </svg>
+</div>
+`;
+
+exports[`App renders with passed props 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 256px;
+  height: 256px;
+  border: 1px solid rgba(192,18,71,1);
+  -webkit-transition: border 0.1s;
+  transition: border 0.1s;
+}
+
+.c0:focus {
+  outline: unset;
+}
+
+<div
+  class="c0"
+  readonly=""
+  tabindex="0"
+>
+  <svg
+    height="24"
+    viewBox="0 0 24 24"
+    width="24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"
+    />
+    <path
+      d="M0 0h24v24H0z"
+      fill="none"
+    />
+  </svg>
+</div>
+`;
