@@ -2,9 +2,12 @@ import React from 'react'
 import ReactAvatarFirebase from 'react-avatar-firebase'
 
 const App = () => {
+  const handleGetImage = path => {
+    console.log(path)
+  }
   return (
     <div>
-      <ReactAvatarFirebase />
+      <ReactAvatarFirebase handleGetImage={handleGetImage} />
 
       <ReactAvatarFirebase readOnly imageSrc='https://cdn.pixabay.com/photo/2017/10/27/15/52/jaguar-2894706__340.jpg' />
 
