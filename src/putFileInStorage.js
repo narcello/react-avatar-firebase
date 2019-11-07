@@ -2,11 +2,12 @@ import firebase from 'firebase'
 import 'firebase/storage'
 
 export function putFileInStorage(path, file) {
+  let folder = handlePathStorage(path)
   let storage = firebase.storage()
   return new Promise((resolve, reject) => {
     let refToFile
     try {
-      refToFile = storage.ref().child(`${path}/${file.name}`)
+      refToFile = storage.ref().child(`${folder}/${file.name}`)
       refToFile
         .put(file)
         .then(res => {
@@ -19,4 +20,12 @@ export function putFileInStorage(path, file) {
       reject(error)
     }
   })
+}
+
+const handlePathStorage = path => {
+  let ret = ''
+  const rootCases = ['', '.', '/']
+  const isRootCase = rootCases.includes(path)
+  if (!isRootCase) ret = path
+  return ret
 }
