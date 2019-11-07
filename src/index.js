@@ -14,7 +14,8 @@ ReactAvatarFirebase.propTypes = {
   size: PropTypes.string,
   borderColor: PropTypes.string,
   borderOpacity: PropTypes.number,
-  readOnly: PropTypes.bool
+  readOnly: PropTypes.bool,
+  storage: PropTypes.object
 }
 
 ReactAvatarFirebase.defaultProps = {
@@ -25,11 +26,12 @@ ReactAvatarFirebase.defaultProps = {
   size: '128px',
   borderColor: '#e2e2e2',
   borderOpacity: 1,
-  readOnly: false
+  readOnly: false,
+  storage: {}
 }
 
 function ReactAvatarFirebase(props) {
-  const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity, readOnly} = props
+  const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity, readOnly, storage} = props
   const [loading, setLoading] = useState(false)
   const [image, setImage] = useState(false)
 
@@ -61,7 +63,7 @@ function ReactAvatarFirebase(props) {
   const addFileToStorageAndGetTask = async file => {
     setLoading(true)
     try {
-      const uploadedImage = await putFileInStorage(pathToStorage, file)
+      const uploadedImage = await putFileInStorage(storage, pathToStorage, file)
       handleGetImage(uploadedImage)
     } catch (error) {
       console.log({error})

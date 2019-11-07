@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactAvatarFirebase from 'react-avatar-firebase'
+import { storage } from './db/config'
 
 const App = () => {
   const handleGetImage = path => {
@@ -7,7 +8,7 @@ const App = () => {
   }
   return (
     <div>
-      <ReactAvatarFirebase handleGetImage={handleGetImage} />
+      <ReactAvatarFirebase storage={storage} handleGetImage={handleGetImage} />
 
       <ReactAvatarFirebase readOnly imageSrc='https://cdn.pixabay.com/photo/2017/10/27/15/52/jaguar-2894706__340.jpg' />
 

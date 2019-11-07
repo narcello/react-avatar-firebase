@@ -26,6 +26,7 @@ Use react-avatar-firebase for upload avatar on Firebase Storage.
 | borderColor | defines border color |
 | borderOpacity | defines border opacity |
 | readOnly | True for disable image selection  |
+| storage | Object ref of firebase storage reference  |
 
 ## Usage
 

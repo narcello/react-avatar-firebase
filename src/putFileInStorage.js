@@ -1,8 +1,4 @@
-import firebase from 'firebase'
-import 'firebase/storage'
-
-export function putFileInStorage(path, file) {
-  let storage = firebase.storage()
+export function putFileInStorage(storage, path, file) {
   return new Promise((resolve, reject) => {
     let refToFile
     try {
