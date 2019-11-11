@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import hexToRgba from 'hex-to-rgba'
 
-const AvatarWrapper = styled.div`
+const AvatarWrapper = styled.canvas`
   display: flex;
   align-items: center;
   justify-content: center;

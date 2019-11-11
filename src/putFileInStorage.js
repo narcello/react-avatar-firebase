@@ -1,5 +1,6 @@
 export function putFileInStorage(storage, path, file) {
   return new Promise((resolve, reject) => {
+    let folder = handlePathStorage(path)
     let refToFile
     try {
       refToFile = storage.ref().child(`${folder}/${file.name}`)

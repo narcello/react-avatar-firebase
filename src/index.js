@@ -33,11 +33,15 @@ ReactAvatarFirebase.defaultProps = {
 function ReactAvatarFirebase(props) {
   const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity, readOnly, storage} = props
   const [loading, setLoading] = useState(false)
-  const [image, setImage] = useState(false)
+  const [image, setImage] = useState(false)  
 
   useEffect(() => {
     if (imageSrc) return setImage(imageSrc)
   }, [loading, imageSrc])
+
+  useEffect(() => {
+    setImageOnCanvas()
+  }, [image])
 
   const handleDropFile = async acceptedFile => {
     let file = acceptedFile[0]
@@ -85,16 +89,28 @@ function ReactAvatarFirebase(props) {
   }
 
   return (
-    <AvatarWrapper
-      animationTime={animationTime}
-      size={size}
-      borderColor={borderColor}
-      borderOpacity={borderOpacity}
-      readOnly={readOnly}
-      {...getRootProps()}>
-      <Child />
-    </AvatarWrapper>
+    <>
+      <AvatarWrapper
+        id="canvas"
+        animationTime={animationTime}
+        size={size}
+        borderColor={borderColor}
+        borderOpacity={borderOpacity}
+        readOnly={readOnly}
+        {...getRootProps()}>
+        <Child />
+      </AvatarWrapper>
+      <span id="procent"></span>
+    </>
   )
 }
 
 export default ReactAvatarFirebase
+
+const setImageOnCanvas = () => {
+  var ctx = document.getElementById('canvas');
+  ctx = ctx && ctx.getContext('2d');
+  ctx.drawImage(new Image(), 0, 0); // fix image
+  ctx.fillStyle = "rgba(200, 0, 0, 0.5)";
+  ctx.fillRect(0, 0, 500, 500);
+}
