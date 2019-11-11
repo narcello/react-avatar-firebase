@@ -5,11 +5,12 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "firebase": "^7.3.0",
     "prop-types": "^15.6.2",
     "react": "link:../node_modules/react",
+    "react-avatar-firebase": "link:..",
     "react-dom": "^16.8.6",
-    "react-scripts": "^3.0.1",
-    "react-avatar-firebase": "link:.."
+    "react-scripts": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
