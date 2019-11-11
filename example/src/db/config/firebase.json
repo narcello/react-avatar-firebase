@@ -1,0 +1,9 @@
+{
+  "apiKey": "AIzaSyBHeIoJmI0anm2tgzpDJayG-L1zZnKLUAI",
+  "authDomain": "react-avatar-firebase.firebaseapp.com",
+  "databaseURL": "https://react-avatar-firebase.firebaseio.com",
+  "projectId": "react-avatar-firebase",
+  "storageBucket": "react-avatar-firebase.appspot.com",
+  "messagingSenderId": "608073744462",
+  "appId": "1:608073744462:web:8706be90df439c2a65431f"
+}
