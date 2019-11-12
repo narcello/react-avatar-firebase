@@ -11,7 +11,7 @@ ReactAvatarFirebase.propTypes = {
   imageSrc: PropTypes.string,
   handleGetImage: PropTypes.func,
   animationTime: PropTypes.string,
-  size: PropTypes.string,
+  size: PropTypes.number,
   borderColor: PropTypes.string,
   borderOpacity: PropTypes.number,
   readOnly: PropTypes.bool,
@@ -23,7 +23,7 @@ ReactAvatarFirebase.defaultProps = {
   imageSrc: null,
   handleGetImage: () => {},
   animationTime: '0.3s',
-  size: '128px',
+  size: 128,
   borderColor: '#e2e2e2',
   borderOpacity: 1,
   readOnly: false,
@@ -33,14 +33,15 @@ ReactAvatarFirebase.defaultProps = {
 function ReactAvatarFirebase(props) {
   const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity, readOnly, storage} = props
   const [loading, setLoading] = useState(false)
-  const [image, setImage] = useState(false)  
+  const [image, setImage] = useState(false)
+  const RAFID = Math.random().toPrecision(3)*100
 
   useEffect(() => {
     if (imageSrc) return setImage(imageSrc)
   }, [loading, imageSrc])
 
   useEffect(() => {
-    setImageOnCanvas()
+    setImageOnCanvas(image, size, RAFID)
   }, [image])
 
   const handleDropFile = async acceptedFile => {
@@ -91,7 +92,7 @@ function ReactAvatarFirebase(props) {
   return (
     <>
       <AvatarWrapper
-        id="canvas"
+        id={`RAF-canvas-${RAFID}`}
         animationTime={animationTime}
         size={size}
         borderColor={borderColor}
@@ -107,10 +108,11 @@ function ReactAvatarFirebase(props) {
 
 export default ReactAvatarFirebase
 
-const setImageOnCanvas = () => {
-  var ctx = document.getElementById('canvas');
+const setImageOnCanvas = (image, size, id) => {
+  var ctx = document.getElementById(`RAF-canvas-${id}`);
   ctx = ctx && ctx.getContext('2d');
-  ctx.drawImage(new Image(), 0, 0); // fix image
-  ctx.fillStyle = "rgba(200, 0, 0, 0.5)";
-  ctx.fillRect(0, 0, 500, 500);
+  let img = new Image(size, size);
+  img.src = image;
+  ctx.drawImage(img, 0, 0);
+  ctx.fillStyle = "rgba(200, 0, 0, 0.1)";
 }
