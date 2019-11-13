@@ -109,10 +109,10 @@ function ReactAvatarFirebase(props) {
 export default ReactAvatarFirebase
 
 const setImageOnCanvas = (image, size, id) => {
-  var ctx = document.getElementById(`RAF-canvas-${id}`);
-  ctx = ctx && ctx.getContext('2d');
+  let canvas = document.getElementById(`RAF-canvas-${id}`);
+  let ctx = canvas && canvas.getContext('2d');
   let img = new Image(size, size);
   img.src = image;
-  ctx.drawImage(img, 0, 0);
-  ctx.fillStyle = "rgba(200, 0, 0, 0.1)";
+  ctx.fillStyle = "white";
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 }
