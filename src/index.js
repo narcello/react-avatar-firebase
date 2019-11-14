@@ -34,7 +34,8 @@ function ReactAvatarFirebase(props) {
   const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity, readOnly, storage} = props
   const [loading, setLoading] = useState(false)
   const [image, setImage] = useState(false)
-  const RAFID = Math.random().toPrecision(3)*100
+  let time = new Date().getTime().toString();
+  const RAFID = time.substr(time.length - 4);
 
   useEffect(() => {
     if (imageSrc) return setImage(imageSrc)
@@ -68,8 +69,8 @@ function ReactAvatarFirebase(props) {
   const addFileToStorageAndGetTask = async file => {
     setLoading(true)
     try {
-      const uploadedImage = await putFileInStorage(storage, pathToStorage, file)
-      handleGetImage(uploadedImage)
+      const uploadedImageTask = putFileInStorage(storage, pathToStorage, file)
+      handleGetImage(uploadedImageTask)
     } catch (error) {
       console.log({error})
     }
@@ -84,13 +85,12 @@ function ReactAvatarFirebase(props) {
       ) : !image ? (
         loading ? <Loading /> : <AddPhoto />
       ) : (
-        <ImageWrapper style={{backgroundImage: `url(${image})`}} />
-      )}
+            <ImageWrapper style={{backgroundImage: `url(${image})`}} />
+          )}
     </>
   }
 
   return (
-    <>
       <AvatarWrapper
         id={`RAF-canvas-${RAFID}`}
         animationTime={animationTime}
@@ -99,10 +99,7 @@ function ReactAvatarFirebase(props) {
         borderOpacity={borderOpacity}
         readOnly={readOnly}
         {...getRootProps()}>
-        <Child />
       </AvatarWrapper>
-      <span id="procent"></span>
-    </>
   )
 }
 
@@ -113,6 +110,45 @@ const setImageOnCanvas = (image, size, id) => {
   let ctx = canvas && canvas.getContext('2d');
   let img = new Image(size, size);
   img.src = image;
-  ctx.fillStyle = "white";
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+  img.onload = () => {
+    console.log("setImageOnCanvas")
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  }
+
+  var posX = canvas.width / 2,
+  posY = canvas.height / 2,
+  fps = 1000 / 200,
+  oneProcent = 360 / 100,
+  result = oneProcent * 64;
+
+  ctx.lineCap = 'round';
+  arcMove();
+  
+  function arcMove(){
+    var deegres = 0;
+    var acrInterval = setInterval (function() {
+      deegres += 1;
+
+      ctx.beginPath();
+      console.log({posX, posY})
+      ctx.arc(posX, posY, 100, 0, 2*Math.PI);
+      ctx.strokeStyle = '#b1b1b1';
+      ctx.lineWidth = '3';
+      ctx.stroke();
+
+      // ctx.beginPath();
+      // ctx.strokeStyle = '#3949AB';
+      // ctx.lineWidth = '10';
+      // ctx.arc( posX, posY, 70, (Math.PI/180) * 270, (Math.PI/180) * (270 + deegres) );
+      // ctx.stroke();
+      if( deegres >= result ) clearInterval(acrInterval);
+    }, fps);
+    
+  }
 }
+
+/**
+ * Before update on storage
+ * onDrop -> Crop image
+ * Upload croped image
+ */
