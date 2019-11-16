@@ -1,21 +1,10 @@
 export function putFileInStorage(storage, path, file) {
-  return new Promise((resolve, reject) => {
-    let folder = handlePathStorage(path)
-    let refToFile
-    try {
-      refToFile = storage.ref().child(`${folder}/${file.name}`)
-      refToFile
-        .put(file)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    } catch (error) {
-      reject(error)
-    }
-  })
+  let folder = handlePathStorage(path)
+  try {
+    return storage.ref().child(`${folder}/${file.name}`).put(file);
+  } catch (error) {
+    reject(error)
+  }
 }
 
 const handlePathStorage = path => {

@@ -6,8 +6,6 @@ const AvatarWrapper = styled.canvas`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: ${({size}) => size}px;
-  height: ${({size}) => size}px;
   border: 1px solid ${({borderColor, borderOpacity}) => hexToRgba(borderColor, borderOpacity)};
   transition: border ${({animationTime}) => animationTime};
   ${({readOnly, borderColor}) => !readOnly && `
