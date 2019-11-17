@@ -1,6 +1,6 @@
 import React, {useCallback, useState, useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
-import {putFileInStorage} from './putFileInStorage'
+import {putFileInStorage, generateIndex, setImageOnCanvas, loadingProgress} from './utils'
 import PropTypes from 'prop-types'
 import { AvatarWrapper, ImageWrapper } from './theme'
 import AddPhoto from './icons/AddPhoto'
@@ -53,7 +53,7 @@ function ReactAvatarFirebase(props) {
   }, [downloadURL])
 
   useEffect(() => {
-    loadingProgress(RAFIDX, progressUpload)
+    loadingProgress(RAFIDX, progressUpload, borderColor)
     if(progressUpload === FINISH_UPLOAD)
       createThumb(file)
   }, [progressUpload])
@@ -119,42 +119,3 @@ function ReactAvatarFirebase(props) {
 }
 
 export default ReactAvatarFirebase
-
-function setImageOnCanvas(image, size, id) {
-  let [canvas, ctx] = getCanvasAndContext(id);
-  let img = new Image(size, size);
-  img.src = image;
-  img.onload = () => {
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  }
-}
-
-function loadingProgress(id, progress) {
-  let [canvas, ctx] = getCanvasAndContext(id);
-  var posX = canvas.width / 2,
-    posY = canvas.height / 2,
-    progress = progress * 3.6,
-    radius = posX;
-
-  ctx.lineCap = 'round';
-  arcMove();
-  
-  function arcMove(){
-    ctx.beginPath();
-    ctx.strokeStyle = '#3949AB';
-    ctx.lineWidth = '10';
-    ctx.arc(posX, posY, radius, (Math.PI/180) * 270, (Math.PI/180) * (270 + progress));
-    ctx.stroke();
-  }
-}
-
-function getCanvasAndContext(id){
-  let canvas = document.getElementById(`RAF-canvas-${id}`);
-  let ctx = canvas && canvas.getContext('2d');
-  return [canvas, ctx];
-}
-
-function generateIndex() {
-  let index = (Math.random().toPrecision(5)*100000).toString();
-  return index;
-}

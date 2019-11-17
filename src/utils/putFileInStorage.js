@@ -1,4 +1,4 @@
-export function putFileInStorage(storage, path, file) {
+export default function putFileInStorage(storage, path, file) {
   let folder = handlePathStorage(path)
   try {
     return storage.ref().child(`${folder}/${file.name}`).put(file);
