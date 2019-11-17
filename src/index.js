@@ -34,11 +34,11 @@ function ReactAvatarFirebase(props) {
   const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity, readOnly, storage} = props
   const [loading, setLoading] = useState(false)
   const [image, setImage] = useState(false)
-  const [RAFIDX, setRAFIDX] = useState(0)
-
-  useEffect(() => {
-    setRAFIDX(generateIndex())
-  }, []);
+  const [RAFIDX, _] = useState(generateIndex())
+  const [progressUpload, setProgressUpload] = useState()
+  const [file, setFile] = useState(null)
+  const [downloadURL, setDownloadURL] = useState(null)
+  const FINISH_UPLOAD = 100
 
   useEffect(() => {
     if (imageSrc) return setImage(imageSrc)
@@ -48,11 +48,20 @@ function ReactAvatarFirebase(props) {
     setImageOnCanvas(image, size, RAFIDX)
   }, [image])
 
+  useEffect(() => {
+    handleGetImage(downloadURL)
+  }, [downloadURL])
+
+  useEffect(() => {
+    loadingProgress(RAFIDX, progressUpload)
+    if(progressUpload === FINISH_UPLOAD)
+      createThumb(file)
+  }, [progressUpload])
+
   const handleDropFile = async (acceptedFile) => {
     let file = acceptedFile[0]
-    createThumb(file)
-    let uploadTask = addFileToStorageAndGetTask(file)
-    loadingProgress(RAFIDX, uploadTask)
+    setFile(file)
+    addFileToStorageAndGetTask(file)
   }
 
   const createThumb = file => {
@@ -74,11 +83,24 @@ function ReactAvatarFirebase(props) {
     setLoading(true)
     try {
       const uploadedImageTask = putFileInStorage(storage, pathToStorage, file)
-      handleGetImage(uploadedImageTask)
+      handleUploadTask(uploadedImageTask)
     } catch (error) {
       console.log({error})
     }
     setLoading(false)
+  }
+
+  const handleUploadTask = uploadTask => {
+    uploadTask && uploadTask.on('state_changed', snapshot => {
+      let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setProgressUpload(progress)
+    }, 
+    (error) => console.log(error), 
+    () => {
+      uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+        setDownloadURL(downloadURL);
+      });
+    });
   }
 
   return (
@@ -103,16 +125,15 @@ function setImageOnCanvas(image, size, id) {
   let img = new Image(size, size);
   img.src = image;
   img.onload = () => {
-    console.log("setImageOnCanvas")
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   }
 }
 
-function loadingProgress(id, task) {
-  handleUploadTask(task);
+function loadingProgress(id, progress) {
   let [canvas, ctx] = getCanvasAndContext(id);
   var posX = canvas.width / 2,
     posY = canvas.height / 2,
+    progress = progress * 3.6,
     radius = posX;
 
   ctx.lineCap = 'round';
@@ -121,8 +142,8 @@ function loadingProgress(id, task) {
   function arcMove(){
     ctx.beginPath();
     ctx.strokeStyle = '#3949AB';
-    ctx.lineWidth = '5';
-    ctx.arc(posX, posY, radius, (Math.PI/180) * 270, (Math.PI/180) * (270 + task.progress) );
+    ctx.lineWidth = '10';
+    ctx.arc(posX, posY, radius, (Math.PI/180) * 270, (Math.PI/180) * (270 + progress));
     ctx.stroke();
   }
 }
@@ -136,30 +157,4 @@ function getCanvasAndContext(id){
 function generateIndex() {
   let index = (Math.random().toPrecision(5)*100000).toString();
   return index;
-}
-function handleUploadTask(uploadTask) {
-  console.log(uploadTask.snapshot)
-  debugger
-  // uploadTask && uploadTask.on('state_changed', function(snapshot){
-  //   // Observe state change events such as progress, pause, and resume
-  //   // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-  //   var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //   console.log('Upload is ' + progress + '% done');
-  //   switch (snapshot.state) {
-  //     case firebase.storage.TaskState.PAUSED: // or 'paused'
-  //       console.log('Upload is paused');
-  //       break;
-  //     case firebase.storage.TaskState.RUNNING: // or 'running'
-  //       console.log('Upload is running');
-  //       break;
-  //   }
-  // }, function(error) {
-  //   // Handle unsuccessful uploads
-  // }, function() {
-  //   // Handle successful uploads on complete
-  //   // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-  //   uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-  //     console.log('File available at', downloadURL);
-  //   });
-  // });
 }

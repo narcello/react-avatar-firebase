@@ -3,7 +3,7 @@ export function putFileInStorage(storage, path, file) {
   try {
     return storage.ref().child(`${folder}/${file.name}`).put(file);
   } catch (error) {
-    reject(error)
+    console.log(error)
   }
 }
 
