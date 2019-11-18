@@ -17,12 +17,4 @@ const AvatarWrapper = styled.canvas`
   &:focus {
     outline: unset;
 `
-const ImageWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  border-radius: 50%;
-`
-export {AvatarWrapper, ImageWrapper}
+export {AvatarWrapper}

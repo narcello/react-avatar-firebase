@@ -1,4 +1,4 @@
-import { getCanvasAndContext } from '.';
+import getCanvasAndContext from './getCanvasAndContext';
 
 export default function loadingProgress(id, progress, color) {
 	let [canvas, ctx] = getCanvasAndContext(id);

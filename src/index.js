@@ -2,9 +2,8 @@ import React, {useCallback, useState, useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
 import {putFileInStorage, generateIndex, setImageOnCanvas, loadingProgress} from './utils'
 import PropTypes from 'prop-types'
-import { AvatarWrapper, ImageWrapper } from './theme'
-import AddPhoto from './icons/AddPhoto'
-import Loading from './icons/Loading'
+import { AvatarWrapper } from './theme'
+import { addPhoto } from './icons'
 
 ReactAvatarFirebase.propTypes = {
   pathToStorage: PropTypes.string,
@@ -33,7 +32,7 @@ ReactAvatarFirebase.defaultProps = {
 function ReactAvatarFirebase(props) {
   const {pathToStorage, imageSrc, handleGetImage, animationTime, size, borderColor, borderOpacity, readOnly, storage} = props
   const [loading, setLoading] = useState(false)
-  const [image, setImage] = useState(false)
+  const [image, setImage] = useState(addPhoto)
   const [RAFIDX, _] = useState(generateIndex())
   const [progressUpload, setProgressUpload] = useState()
   const [file, setFile] = useState(null)
