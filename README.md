@@ -45,6 +45,7 @@ const App = () => {
         size={128}
         borderColor='#e2e2e2'
         borderOpacity={0.9}
+        storage={'<your firebase storage instance here>'}
        />
     </div>
   )

@@ -1,3 +1,15 @@
+## [0.0.3] - 2019-11-19
+
+### Added
+- [Add firebase project - Exemple Site](https://github.com/MarcelloVSilva/react-avatar-firebase/pull/21/files)
+- [Add firebase storage prop](https://github.com/MarcelloVSilva/react-avatar-firebase/pull/21/files)
+
+### Changed
+- [Change loading feedback](https://github.com/MarcelloVSilva/react-avatar-firebase/pull/22)
+
+### Fixed
+- [Fixed pathToStorage bug](https://github.com/MarcelloVSilva/react-avatar-firebase/pull/18)
+
 ## [0.0.2] - 2019-10-27
 
 ### Added
