@@ -22,10 +22,11 @@ Use react-avatar-firebase for upload avatar on Firebase Storage.
 | imageSrc |  Pass a image url to render |
 | handleGetImage | Callback that gives you a return of upload of image on storage |
 | animationTime | defines hover avatar wrapper animation time |
-| size | defines avatar wrapper size |
+| size | defines avatar wrapper px size |
 | borderColor | defines border color |
 | borderOpacity | defines border opacity |
 | readOnly | True for disable image selection  |
+| storage | Object ref of firebase storage reference  |
 
 ## Usage
 
@@ -41,9 +42,10 @@ const App = () => {
         imageSrc={imageSrc}
         handleGetImage={handleGetImage}
         animationTime='0.3s'
-        size='128px'
+        size={128}
         borderColor='#e2e2e2'
         borderOpacity={0.9}
+        storage={'<your firebase storage instance here>'}
        />
     </div>
   )
